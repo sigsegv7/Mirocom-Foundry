@@ -14,5 +14,25 @@ module Soc (
     input wire Clk_i,
     input wire Reset_i
 );
+    logic Clk;
+    logic Reset;
+`ifndef K3_SIM
+    logic PllLocked;
 
+    // 320 MHz root clock domain
+    pll RootPll (
+        .refclk(Clk_i),
+        .rst(Reset),
+        .outclk_0(Clk),
+        .locked(PllLocked)
+    );
+
+    // Reset bridge
+    always_ff @(posedge Clk) begin
+        Reset <= ~Reset_i | ~PllLocked;
+    end
+`else
+    assign Clk = Clk_i;
+    assign Reset = ~Reset_i;
+`endif  /* !_K3_SIM */
 endmodule

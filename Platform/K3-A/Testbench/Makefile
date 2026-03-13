@@ -19,7 +19,7 @@ obj:
 		-DK3_SIM		 	 \
 		--trace 			 \
 		-cc 				 \
-		-I../rtl/inc		 \
+		-I../Rtl/Include	 \
 		$(SV_FILES) 		 \
 		--exe $(TB_FILES) 	 \
 		--top-module Soc

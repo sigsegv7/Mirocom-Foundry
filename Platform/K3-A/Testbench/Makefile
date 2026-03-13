@@ -16,7 +16,7 @@ all: obj vcd
 obj:
 	verilator 				 \
 		-Wall 				 \
-		-DGCA64_SIM		 	 \
+		-DK3_SIM		 	 \
 		--trace 			 \
 		-cc 				 \
 		-I../rtl/inc		 \

@@ -1,0 +1,4 @@
+- MIZON for Mirocom K3 processors -
+
+Welcome to the Mizion Operating System! This is a live environment, feel free to look
+around and explore!

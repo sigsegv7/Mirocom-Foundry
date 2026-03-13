@@ -4,7 +4,11 @@
 #
 
 .PHONY: all
-all: Platform
+all: Network Platform
+
+.PHONY: Network
+Network:
+	cd Network/; make
 
 .PHONY: Platform
 Platform:

@@ -17,7 +17,7 @@
 // PROGRAM "Quartus Prime"
 // VERSION "Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition"
 
-// DATE "03/13/2026 18:05:38"
+// DATE "03/13/2026 18:13:30"
 
 // 
 // Device: Altera 5CSEBA6U23I7 Package UFBGA672
@@ -36,8 +36,8 @@ input 	Clk_i;
 input 	Reset_i;
 
 // Design Ports Information
-// Clk_i	=>  Location: PIN_AH18,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// Reset_i	=>  Location: PIN_AG24,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// Clk_i	=>  Location: PIN_V11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// Reset_i	=>  Location: PIN_Y15,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
 wire gnd;
@@ -56,7 +56,7 @@ wire \Reset_i~input_o ;
 wire \~QUARTUS_CREATED_GND~I_combout ;
 
 
-// Location: IOIBUF_X68_Y0_N52
+// Location: IOIBUF_X32_Y0_N1
 cyclonev_io_ibuf \Clk_i~input (
 	.i(Clk_i),
 	.ibar(gnd),
@@ -67,7 +67,7 @@ defparam \Clk_i~input .bus_hold = "false";
 defparam \Clk_i~input .simulate_z_as = "z";
 // synopsys translate_on
 
-// Location: IOIBUF_X80_Y0_N35
+// Location: IOIBUF_X64_Y0_N1
 cyclonev_io_ibuf \Reset_i~input (
 	.i(Reset_i),
 	.ibar(gnd),
@@ -78,7 +78,7 @@ defparam \Reset_i~input .bus_hold = "false";
 defparam \Reset_i~input .simulate_z_as = "z";
 // synopsys translate_on
 
-// Location: LABCELL_X48_Y28_N0
+// Location: LABCELL_X74_Y36_N0
 cyclonev_lcell_comb \~QUARTUS_CREATED_GND~I (
 // Equation(s):
 

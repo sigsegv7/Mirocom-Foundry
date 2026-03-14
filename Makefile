@@ -21,3 +21,4 @@ Platform:
 .PHONY: clean
 clean:
 	cd Network/; make clean
+	cd System/; make clean

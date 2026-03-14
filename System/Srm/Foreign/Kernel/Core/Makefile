@@ -11,6 +11,7 @@ CFLAGS = 					\
 	$(SYS_CFLAGS) 			\
 	-I../Include			\
 	-I../../Sdk/Include/	\
+	-I../../Target/			\
 	-D_KERNEL				\
 	-MMD					\
 	-DPRINTF_DISABLE_SUPPORT_PTRDIFF_T \

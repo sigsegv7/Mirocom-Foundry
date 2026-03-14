@@ -9,3 +9,7 @@ all: Foreign
 .PHONY: Foreign
 Foreign:
 	cd Foreign/; make
+
+.PHONY: clean
+clean:
+	cd Foreign/; make clean

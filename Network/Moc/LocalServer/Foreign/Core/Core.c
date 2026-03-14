@@ -10,7 +10,7 @@
 #define MOC_VERSION "0.0.1"
 
 /*
- *  Display the startup help menu
+ * Display the startup help menu
  */
 static void
 DisplayHelp(void)
@@ -24,7 +24,7 @@ DisplayHelp(void)
 }
 
 /*
- *  Display the version of MOC
+ * Display the version of MOC
  */
 static void
 DisplayVersion(void)

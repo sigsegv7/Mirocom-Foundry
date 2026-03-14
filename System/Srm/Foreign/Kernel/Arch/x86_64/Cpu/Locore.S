@@ -21,11 +21,22 @@ MdCpuLoInit:
      * processor core.
      */
 
-    /*
-     * Configure the IA32_EFER MSR
-     */
+    push %rbx
+    push %r11
+    push %r12
+    push %r13
+    push %r14
+    push %r15
+
     mov $IA32_EFER, %ecx        /* IA32_EFER -> ECX */
     rdmsr                       /* MSR -> EDX:EAX */
     or $EFER_NXE, %eax          /* Enable no-execute bits */
     wrmsr                       /* Write the MSR back */
+
+    pop %r15
+    pop %r14
+    pop %r13
+    pop %r12
+    pop %r11
+    pop %rbx
     retq                        /* And back to the caller we go */

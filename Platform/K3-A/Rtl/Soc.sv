@@ -35,4 +35,10 @@ module Soc (
     assign Clk = Clk_i;
     assign Reset = ~Reset_i;
 `endif  /* !_K3_SIM */
+
+    // Mainbus 0
+    Mainbus Mainbus0 (
+        .Clk_i(Clk),
+        .Reset_i(Reset)
+    );
 endmodule

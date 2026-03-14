@@ -5,6 +5,7 @@
 
     .text
     .globl _start
+    .extern KernelMain
 _start:
     /*
      * This is where the bootloader passes control to us during system
@@ -21,6 +22,7 @@ _start:
     cli                 /* Clear interrupts */
     cld                 /* Clear direction flag */
     xor %rbp, %rbp      /* Denote end of callstack */
+    call KernelMain     /* Enter the kernel */
 
 1:  hlt
     jmp 1b

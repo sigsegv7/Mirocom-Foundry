@@ -13,3 +13,7 @@ Network:
 .PHONY: Platform
 Platform:
 	cd Platform/; make
+
+.PHONY: clean
+clean:
+	cd Network/; make clean

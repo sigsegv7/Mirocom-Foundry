@@ -6,3 +6,7 @@
 .PHONY: all
 all:
 	cd MocLocalServer/Foreign/; make
+
+.PHONY: clean
+clean:
+	cd MocLocalServer/Foreign/; make clean

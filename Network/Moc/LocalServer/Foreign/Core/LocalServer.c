@@ -3,14 +3,6 @@
  * Provided under the BSD-3 clause
  */
 
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "LocalServer/Common.h"
-#include "LocalServer/LocalServer.h"
-#include "LocalServer/Types.h"
-
 /*
  * Description:
  *      This module implements the server-side interface
@@ -19,10 +11,14 @@
  *      Ian M. Moffett <ian@mirocom.org>
  */
 
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <stdio.h>
 #include <errno.h>
 #include "LocalServer/Common.h"
-#include "LocalServer/Types.h"
 #include "LocalServer/LocalServer.h"
+#include "LocalServer/Types.h"
 
 INT32
 LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)

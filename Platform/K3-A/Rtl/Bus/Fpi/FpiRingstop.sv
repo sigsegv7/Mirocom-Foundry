@@ -35,7 +35,7 @@ module FpiRingstop #(
 
     output FpiPacket Link_o
 );
-    module [3:0] MuxSel;
+    logic [3:0] MuxSel;
 
     //
     // Splice the transport link injection port with the inbound

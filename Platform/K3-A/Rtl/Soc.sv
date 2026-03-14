@@ -22,7 +22,7 @@ module Soc (
     // 320 MHz root clock domain
     pll RootPll (
         .refclk(Clk_i),
-        .rst(Reset),
+        .rst(~Reset_i),
         .outclk_0(Clk),
         .locked(PllLocked)
     );

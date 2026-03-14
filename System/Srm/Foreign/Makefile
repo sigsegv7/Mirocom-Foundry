@@ -6,13 +6,17 @@
 include Mk/Default.mk
 
 .PHONY: all
-all: Toolchain Arch GenIso
+all: Toolchain Kernel Arch GenIso
 
 .PHONY: GenIso
 GenIso:
 	cd Boot/Arch/$(ARCH)/; \
 		./Host/GetDeps.sh; \
 		./Host/GenIso.sh
+
+.PHONY: Kernel
+Kernel:
+	cd Kernel/Core/; make $(PASSDOWN_ARGS)
 
 .PHONY: Arch
 Arch:

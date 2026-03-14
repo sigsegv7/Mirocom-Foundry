@@ -86,6 +86,11 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
     PollList[0].fd = SocketFd;
     PollList[0].events = POLLIN;
 
+    /* Initialize all other fs to -1 */
+    for (INT32 i = 1; i < N_POLL_MAX; ++i) {
+        PollList[i].fd = -1;
+    }
+
     Result->SocketFd = SocketFd;
     return 0;
 }

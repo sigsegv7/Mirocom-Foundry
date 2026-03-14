@@ -6,7 +6,13 @@
 include Mk/Default.mk
 
 .PHONY: all
-all: Toolchain Arch
+all: Toolchain Arch GenIso
+
+.PHONY: GenIso
+GenIso:
+	cd Boot/Arch/$(ARCH)/; \
+		./Host/GetDeps.sh; \
+		./Host/GenIso.sh
 
 .PHONY: Arch
 Arch:

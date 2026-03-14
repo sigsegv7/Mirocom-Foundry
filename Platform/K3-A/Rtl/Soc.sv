@@ -22,7 +22,7 @@ module Soc (
     // 320 MHz root clock domain
     pll RootPll (
         .refclk(Clk_i),
-        .rst(Reset),
+        .rst(~Reset_i),
         .outclk_0(Clk),
         .locked(PllLocked)
     );
@@ -35,4 +35,10 @@ module Soc (
     assign Clk = Clk_i;
     assign Reset = ~Reset_i;
 `endif  /* !_K3_SIM */
+
+    // Mainbus 0
+    Mainbus Mainbus0 (
+        .Clk_i(Clk),
+        .Reset_i(Reset)
+    );
 endmodule

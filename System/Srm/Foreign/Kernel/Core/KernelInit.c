@@ -11,8 +11,13 @@
  *      Ian M. Moffett <ian@mirocom.org>
  */
 
+#include <Hal/Cpu.h>
+
 void
 KernelMain(void)
 {
+    /* Initialize the processor */
+    HalCpuEarlyInit();
+
     for (;;);
 }

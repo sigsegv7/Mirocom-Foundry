@@ -4,8 +4,8 @@
 #
 
 .PHONY: all
-all: Foreign
+all: Toolchain
 
-.PHONY: Foreign
-Foreign:
-	cd Foreign/; make
+.PHONY: Toolchain
+Toolchain:
+	./Host/Toolchain.sh

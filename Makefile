@@ -4,7 +4,7 @@
 #
 
 .PHONY: all
-all: System Network Platform
+all: Platform Network System
 
 .PHONY: System
 System:

@@ -3,8 +3,14 @@
 # Provided under the BSD-3 clause
 #
 
+include Mk/Default.mk
+
 .PHONY: all
-all: Toolchain
+all: Toolchain Arch
+
+.PHONY: Arch
+Arch:
+	cd Kernel/Arch/$(ARCH); make $(PASSDOWN_ARGS)
 
 .PHONY: Toolchain
 Toolchain:

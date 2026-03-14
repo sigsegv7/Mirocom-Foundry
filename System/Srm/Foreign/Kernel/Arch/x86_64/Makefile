@@ -13,6 +13,7 @@ KERN_BIN = ../../Mizion.sys
 
 CFLAGS = 				\
 	$(SYS_CFLAGS)		\
+	-I../../../Target	\
 	-D_KERNEL
 
 .PHONY: all

@@ -6,7 +6,12 @@
 include Mk/Default.mk
 
 .PHONY: all
-all: Toolchain Kernel Arch GenIso
+all: Target Toolchain Kernel Arch GenIso
+
+.PHONY: Target
+Target:
+	mkdir -p Target/Machine/
+	rsync -avr Kernel/Include/Arch/$(ARCH)/*.h Target/Machine
 
 .PHONY: GenIso
 GenIso:

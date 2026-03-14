@@ -17,16 +17,21 @@
 //
 // On-chip ringbus
 //
-// @Clk_i:      Clock input
-// @Reset_i:    Reset input
-// @Seg0Lip_i:  Segment 0 link injection port
-// @Seg1Lip_i:  Segment 1 link injection port
+// @Clk_i:          Clock input
+// @Reset_i:        Reset input
+// @Seg0Lip_i:      Segment 0 link injection port
+// @Seg1Lip_i:      Segment 1 link injection port
+// @Seg0Ready_o:    Segment 0 link injection port ready
+// @Seg1Ready_o:    Segment 1 link injection port ready
 //
 module FpiRingbus (
     input wire Clk_i,
     input wire Reset_i,
     input FpiPacket Seg0Lip_i,
-    input FpiPacket Seg1Lip_i
+    input FpiPacket Seg1Lip_i,
+
+    output logic Seg0Ready_o,
+    output logic Seg1Ready_o
 );
     FpiPacket Seg0Feed;
     FpiPacket Seg1Feed;
@@ -37,7 +42,8 @@ module FpiRingbus (
         .Reset_i(Reset_i),
         .Link_i(Seg0Feed),
         .Lip_i(Seg0Lip_i),
-        .Link_o(Seg1Feed)
+        .Link_o(Seg1Feed),
+        .Ready_o(Seg0Ready_o)
     );
 
     // Ring segment 1
@@ -46,6 +52,7 @@ module FpiRingbus (
         .Reset_i(Reset_i),
         .Link_i(Seg1Feed),
         .Lip_i(Seg1Lip_i),
-        .Link_o(Seg0Feed)
+        .Link_o(Seg0Feed),
+        .Ready_o(Seg1Ready_o)
     );
 endmodule

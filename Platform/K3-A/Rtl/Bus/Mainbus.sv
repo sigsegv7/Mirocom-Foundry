@@ -27,11 +27,18 @@ module Mainbus (
     FpiPacket DataSeg0Lip0;
     FpiPacket DataSeg1Lip0;
 
+    // Data segment ready feeders
+    /* verilator lint_off UNUSEDSIGNAL */
+    logic DataSeg0Ready;
+    logic DataSeg1Ready;
+
     FpiRingbus RequestRing (
         .Clk_i(Clk_i),
         .Reset_i(Reset_i),
         .Seg0Lip_i(DataSeg0Lip0),
-        .Seg1Lip_i(DataSeg1Lip0)
+        .Seg1Lip_i(DataSeg1Lip0),
+        .Seg0Ready_o(DataSeg0Ready),
+        .Seg1Ready_o(DataSeg1Ready)
     );
 
     always_ff @(posedge Clk_i) begin

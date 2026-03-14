@@ -5,7 +5,7 @@
 
 //
 // Description:
-//      This module implements "ringstops for the Mirocom"
+//      This module implements "ringstops" for the Mirocom
 //      Fast Platform Interconnect (FPI).
 // Author:
 //      Ian M. Moffett <ian@mirocom.org>
@@ -21,6 +21,7 @@
 // @Reset_i: Reset input
 // @Link_i:  Inbound transport link
 // @Lip_i:   Link injection port
+// @Ready_o: If high, link injection port is ready
 // @Link_o:  Outbound transport link
 //
 module FpiRingstop #(
@@ -33,9 +34,17 @@ module FpiRingstop #(
     input FpiPacket Link_i,
     input FpiPacket Lip_i,
 
+    output logic Ready_o,
     output FpiPacket Link_o
 );
     logic [3:0] MuxSel;
+
+    //
+    // If the data on the link injection port is currently invalid,
+    // that means it is not carrying anything for anyone yet and thus
+    // is ready for incoming data.
+    //
+    assign Ready_o = (Lip_i.Kind == FPI_KIND_INVALID);
 
     //
     // Splice the transport link injection port with the inbound

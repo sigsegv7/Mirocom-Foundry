@@ -5,7 +5,7 @@
 
 //
 // Description:
-//      This module implements "ringstops for the Mirocom"
+//      This module implements "ringstops" for the Mirocom
 //      Fast Platform Interconnect (FPI).
 // Author:
 //      Ian M. Moffett <ian@mirocom.org>

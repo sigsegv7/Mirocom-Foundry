@@ -26,3 +26,7 @@ all: $(ASMOFILES) $(OFILES)
 
 %.S.o: %.S
 	$(SYS_CC) -c $(CFLAGS) $< -o $@
+
+.PHONY: clean
+clean:
+	rm -f $(MISC_OFILES)

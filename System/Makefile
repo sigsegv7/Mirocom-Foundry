@@ -9,3 +9,7 @@ all: Srm
 .PHONY: Srm
 Srm:
 	cd Srm/; make
+
+.PHONY: clean
+clean:
+	cd Srm/; make clean

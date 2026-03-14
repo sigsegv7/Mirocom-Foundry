@@ -30,3 +30,7 @@ Arch:
 .PHONY: Toolchain
 Toolchain:
 	./Host/Toolchain.sh
+
+.PHONY: clean
+clean:
+	cd Kernel/Arch/$(ARCH); make clean

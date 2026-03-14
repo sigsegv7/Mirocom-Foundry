@@ -23,6 +23,7 @@
 INT32
 LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
 {
+    struct pollfd *PollList = NULL;
     struct sockaddr_un DomainSocket;
     USIZE NameLength;
     int SocketFd, Status;
@@ -33,6 +34,7 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
     }
 
     BZERO(Result, sizeof(*Result));
+    BZERO(Result->PollList, sizeof(Result->PollList));
     BZERO(&DomainSocket, sizeof(DomainSocket));
 
     /* Truncate the length if needed */
@@ -78,6 +80,11 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
         close(SocketFd);
         return -1;
     }
+
+    /* Initialize the poll list */
+    PollList = &Result->PollList[0];
+    PollList[0].fd = SocketFd;
+    PollList[0].events = POLLIN;
 
     Result->SocketFd = SocketFd;
     return 0;

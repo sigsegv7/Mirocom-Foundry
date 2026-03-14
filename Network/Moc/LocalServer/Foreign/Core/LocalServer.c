@@ -58,7 +58,7 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
     snprintf(
         DomainSocket.sun_path,
         sizeof(DomainSocket.sun_path),
-        "/tmp/%s.sock\n",
+        "/tmp/%s.sock",
         Result->ServerName
     );
 

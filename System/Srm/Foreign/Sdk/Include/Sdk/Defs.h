@@ -16,11 +16,13 @@
 
 /* C attribute wrappers */
 #define ATTR(x)         __attribute__((x))
+#define ALIGN(x)        ATTR(aligned((x)))
 #define PACKED          ATTR(packed)
 #define NO_RETURN       ATTR(no_return)
 #define ALWAYS_INLINE   ATTR(always_inline)
 #define LIKELY(exp)     __builtin_expect(((exp) != 0), 1)
 #define UNLIKELY(exp)   __builtin_expect(((exp) != 0), 0)
+#define ASMV            __asm__ __volatile__
 
 /* Obtain the size of a fixed array */
 #define NELEM(arr) (sizeof(arr) / sizeof(arr[0]))

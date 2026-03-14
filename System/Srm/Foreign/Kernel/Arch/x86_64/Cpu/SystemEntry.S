@@ -13,7 +13,7 @@ _start:
      * 1) Interrupts disabled
      * 2) Direction flag cleared
      *
-     * Our job here is to to the minimal amount of initialization before
+     * Our job here is to do the minimal amount of initialization before
      * passing control to the actual kernel to which it will perform other
      * kinds of initialization.
      */

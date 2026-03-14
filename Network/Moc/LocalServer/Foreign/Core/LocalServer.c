@@ -58,7 +58,6 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
         Result->ServerName
     );
 
-
     /* Bind the domain socket */
     Status = bind(
         SocketFd,
@@ -68,6 +67,14 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
 
     if (Status < 0) {
         perror("bind");
+        close(SocketFd);
+        return -1;
+    }
+
+    /* Mark the socket as listening */
+    Status = listen(SocketFd, LISTEN_BACKLOG);
+    if (Status < 0) {
+        perror("listen");
         close(SocketFd);
         return -1;
     }

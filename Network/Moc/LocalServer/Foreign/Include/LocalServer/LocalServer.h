@@ -16,6 +16,8 @@
 
 #include "LocalServer/Types.h"
 
+#define LISTEN_BACKLOG 16
+
 /*
  * MOC local server state machine
  *

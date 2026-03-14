@@ -5,12 +5,17 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include "LocalServer/Types.h"
+#include "LocalServer/LocalServer.h"
 
 /* MOC version */
 #define MOC_VERSION "0.0.1"
 
+/* Local server socket name */
+#define LOCAL_SERVER_NAME "moc.local"
+
 /*
- *  Display the startup help menu
+ * Display the startup help menu
  */
 static void
 DisplayHelp(void)
@@ -24,7 +29,7 @@ DisplayHelp(void)
 }
 
 /*
- *  Display the version of MOC
+ * Display the version of MOC
  */
 static void
 DisplayVersion(void)
@@ -36,6 +41,25 @@ DisplayVersion(void)
         "Version v%s\n",
         MOC_VERSION
     );
+}
+
+/*
+ * Bring up the local server and begin listening
+ * for connections.
+ */
+static INT32
+ServerStart(void)
+{
+    MOC_LOCAL_SERVER LocalServer;
+    INT32 Status;
+
+    Status = LocalServerCreate(LOCAL_SERVER_NAME, &LocalServer);
+    if (Status < 0) {
+        return -1;
+    }
+
+    LocalServerDestroy(&LocalServer);
+    return 0;
 }
 
 int
@@ -54,5 +78,5 @@ main(int argc, char **argv)
        }
     }
 
-    return 0;
+    return ServerStart();
 }

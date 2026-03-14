@@ -14,15 +14,21 @@
 #ifndef LOCALSERVER_LOCALSERVER_H
 #define LOCALSERVER_LOCALSERVER_H
 
+#include <poll.h>
 #include "LocalServer/Types.h"
+
+#define LISTEN_BACKLOG 16
+#define N_POLL_MAX 16
 
 /*
  * MOC local server state machine
  *
+ * @PollList:   File descriptor poll list
  * @ServerName: Name of server, used for IPC path
- * @SocketFd: Socket file descriptor
+ * @SocketFd:   Socket file descriptor
  */
 typedef struct {
+    struct pollfd PollList[N_POLL_MAX];
     char ServerName[32];
     int SocketFd;
 } MOC_LOCAL_SERVER;

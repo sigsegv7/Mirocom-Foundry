@@ -3,14 +3,6 @@
  * Provided under the BSD-3 clause
  */
 
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "LocalServer/Common.h"
-#include "LocalServer/LocalServer.h"
-#include "LocalServer/Types.h"
-
 /*
  * Description:
  *      This module implements the server-side interface
@@ -19,14 +11,19 @@
  *      Ian M. Moffett <ian@mirocom.org>
  */
 
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <stdio.h>
 #include <errno.h>
 #include "LocalServer/Common.h"
-#include "LocalServer/Types.h"
 #include "LocalServer/LocalServer.h"
+#include "LocalServer/Types.h"
 
 INT32
 LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
 {
+    struct pollfd *PollList = NULL;
     struct sockaddr_un DomainSocket;
     USIZE NameLength;
     int SocketFd, Status;
@@ -37,6 +34,7 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
     }
 
     BZERO(Result, sizeof(*Result));
+    BZERO(Result->PollList, sizeof(Result->PollList));
     BZERO(&DomainSocket, sizeof(DomainSocket));
 
     /* Truncate the length if needed */
@@ -62,7 +60,6 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
         Result->ServerName
     );
 
-
     /* Bind the domain socket */
     Status = bind(
         SocketFd,
@@ -76,6 +73,24 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
         return -1;
     }
 
+    /* Mark the socket as listening */
+    Status = listen(SocketFd, LISTEN_BACKLOG);
+    if (Status < 0) {
+        perror("listen");
+        close(SocketFd);
+        return -1;
+    }
+
+    /* Initialize the poll list */
+    PollList = &Result->PollList[0];
+    PollList[0].fd = SocketFd;
+    PollList[0].events = POLLIN;
+
+    /* Initialize all other fs to -1 */
+    for (INT32 i = 1; i < N_POLL_MAX; ++i) {
+        PollList[i].fd = -1;
+    }
+
     Result->SocketFd = SocketFd;
     return 0;
 }
@@ -83,10 +98,23 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
 void
 LocalServerDestroy(MOC_LOCAL_SERVER *LocalServer)
 {
+    char NameBuffer[64];
+
     if (LocalServer == NULL) {
         return;
     }
 
     close(LocalServer->SocketFd);
     LocalServer->SocketFd = -1;
+
+    /* Grab the socket path */
+    snprintf(
+        NameBuffer,
+        sizeof(NameBuffer),
+        "/tmp/%s.sock",
+        LocalServer->ServerName
+    );
+
+    /* Delete the socket file */
+    remove(NameBuffer);
 }

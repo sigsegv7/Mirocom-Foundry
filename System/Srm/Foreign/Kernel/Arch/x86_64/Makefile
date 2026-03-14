@@ -11,9 +11,10 @@ ASMOFILES = $(ASMFILES:.S=.S.o)
 
 KERN_BIN = ../../Mizion.sys
 
-CFLAGS = 				\
-	$(SYS_CFLAGS)		\
-	-I../../../Target	\
+CFLAGS = 					\
+	$(SYS_CFLAGS)			\
+	-I../../../Target		\
+	-I../../../Sdk/Include/ \
 	-D_KERNEL
 
 .PHONY: all

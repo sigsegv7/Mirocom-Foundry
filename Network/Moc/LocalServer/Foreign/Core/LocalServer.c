@@ -86,10 +86,23 @@ LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result)
 void
 LocalServerDestroy(MOC_LOCAL_SERVER *LocalServer)
 {
+    char NameBuffer[64];
+
     if (LocalServer == NULL) {
         return;
     }
 
     close(LocalServer->SocketFd);
     LocalServer->SocketFd = -1;
+
+    /* Grab the socket path */
+    snprintf(
+        NameBuffer,
+        sizeof(NameBuffer),
+        "/tmp/%s.sock",
+        LocalServer->ServerName
+    );
+
+    /* Delete the socket file */
+    remove(NameBuffer);
 }

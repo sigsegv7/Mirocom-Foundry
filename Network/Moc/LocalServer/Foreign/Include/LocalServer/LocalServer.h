@@ -27,4 +27,21 @@ typedef struct {
     int SocketFd;
 } MOC_LOCAL_SERVER;
 
+/*
+ * Create a new local server
+ *
+ * @Name:   Name of local server
+ * @Result: Result is written here
+ *
+ * Returns zero on success
+ */
+INT32 LocalServerCreate(const char *Name, MOC_LOCAL_SERVER *Result);
+
+/*
+ * Destroy a MOC local server
+ *
+ * @LocalServer: Local server to destroy
+ */
+void LocalServerDestroy(MOC_LOCAL_SERVER *LocalServer);
+
 #endif /* !LOCALSERVER_LOCALSERVER_H */

@@ -45,12 +45,12 @@ main(int argc, char **argv)
 
     while ((Opt = getopt(argc, argv, "hv")) != -1) {
        switch (Opt)  {
-           case 'h':
-               DisplayHelp();
-               return -1;
-            case 'v':
-                DisplayVersion();
-                return -1;
+       case 'h':
+            DisplayHelp();
+            return -1;
+        case 'v':
+            DisplayVersion();
+            return -1;
        }
     }
 
